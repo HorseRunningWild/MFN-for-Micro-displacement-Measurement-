@@ -54,10 +54,15 @@ Similarly, the dataset for fine-tuning should also be in an `.xlsx` file with th
 
 ### Data Structure
 We expect the file structure for storing data to be as follows：
+
 Dataset_simulate_First_Time/
+
 ├─ begin_0000_end_0082/
+
 │  └─ down_begin_0000_end_0082/
+
 │     └─ image_001.npy
+
 │     └─ displacement.xlsx
 
 If you wish to use our scripts directly, please ensure your data format is consistent with the tables above.
