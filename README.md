@@ -29,7 +29,7 @@
 6. `sbatch_batched_pretrain.sh`: An example script for submitting jobs to a server (using SLURM's `sbatch` command). It defines nearly all the necessary hyperparameters, including training mode, dataset path, learning rate, and more. To perform pretraining, fine-tuning, or re-pretraining with our model, you typically only need to modify the parameters within this script.
 
 
-## Data Preparation
+# Data Preparation
 ---
 
 ### Data Format
@@ -68,5 +68,29 @@ Dataset_simulate/
 ```
 
 If you wish to use our scripts directly, please ensure your data format is consistent with the tables above.
+
+# Dependency Overview
+---
+| Category | Dependency | Purpose / Notes |
+| --- | --- | --- |
+| Core ML | torch | Primary deep learning framework for model definition, training loops, tensor ops |
+| Core ML | torchvision | Image utilities and transforms complementing PyTorch |
+| Core ML | transformers | Supplies the MobileViTV2 backbone for the image branch |
+| Numerical & Data | numpy | Array math, sampling, numerical helpers in processors and trainers |
+| Numerical & Data | pandas | Tabular reporting for evaluation summaries (e.g., noise tests) |
+| Numerical & Data | scipy | Signal processing (FFT, peak finding) for derived physical features |
+| Imaging | opencv-python (cv2) | Image preprocessing, resizing, channel manipulations |
+| Imaging | Pillow | PIL image objects feeding the MobileViT pipeline |
+| Imaging | torchvision.transforms | Deterministic transform chain for MobileViT inputs |
+| Evaluation | matplotlib *(optional)* | Plotting utilities for analysis workflows |
+| Dataset IO | torch.utils.data | Custom datasets, samplers, collate functions |
+| Dataset IO | multiprocessing *(stdlib)* | Enables dataloader workers via `num_workers` |
+| CLI & Logging *(stdlib)* | argparse, logging, warnings, datetime, time, pathlib, os, sys, math, random, glob, itertools | Command-line parsing, logging, scheduling, filesystem access, general utilities |
+| Config *(stdlib)* | json | Config serialization and report exports |
+| Shell / Infra | Bash / SLURM (sbatch) | Required to launch provided HPC batch scripts |
+| Shell / Infra | Conda | Activates the runtime environment for jobs |
+| Shell / Infra | GNU bc | Floating-point arithmetic in `sbatch_variable_data_size.sh` |
+| Optional | tensorboard | Optional experiment dashboards and logging backends |
+
 
    
