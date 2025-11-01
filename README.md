@@ -17,8 +17,10 @@
    1. Manages batched training for large datasets by processing data in "batches of folders". It supports both pretraining and fine-tuning workflows, along with checkpoint resumption and inter-batch model accumulation.
    2. Selects different data processors and loss/logging formats based on the specified `mode` (e.g., `pretrain` uses only MSE loss, while `finetune` uses a combination of MSE + Cross-Entropy + optional orthogonal loss).
    3. Besides `Finetune` and `Pretrain`, this script also defines a `Train_again` method. This is useful for scenarios where the initial pretraining performance is unsatisfactory, or when you want to further pretrain a model (e.g., our provided one) on your own system's simulated noise. You can specify a model path to initiate another pretraining phase.
+  
+4. `train_variable_data_size.py`:Through this document, you can study how much data is needed to achieve good fine-tuning results. By default, we divide the fine-tuning dataset into 5 parts and successively use 1 to 5 parts of the dataset for fine-tuning, and then evaluate on the test set (the amount of test set data used can also be specified). You need to specify your model path, fine-tuning dataset path, and test set path in the corresponding `variable_data_size.sh` file.
 
-4. `sbatch_batched_pretrain.sh`: An example script for submitting jobs to a server (using SLURM's `sbatch` command). It defines nearly all the necessary hyperparameters, including training mode, dataset path, learning rate, and more. To perform pretraining, fine-tuning, or re-pretraining with our model, you typically only need to modify the parameters within this script.
+5. `sbatch_batched_pretrain.sh`: An example script for submitting jobs to a server (using SLURM's `sbatch` command). It defines nearly all the necessary hyperparameters, including training mode, dataset path, learning rate, and more. To perform pretraining, fine-tuning, or re-pretraining with our model, you typically only need to modify the parameters within this script.
 
 
 ## Data Format Preparation
