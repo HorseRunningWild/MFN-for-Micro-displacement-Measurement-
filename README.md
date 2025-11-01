@@ -20,11 +20,19 @@
   
 4. `train_variable_data_size.py`:Through this document, you can study how much data is needed to achieve good fine-tuning results. By default, we divide the fine-tuning dataset into 5 parts and successively use 1 to 5 parts of the dataset for fine-tuning, and then evaluate on the test set (the amount of test set data used can also be specified). You need to specify your model path, fine-tuning dataset path, and test set path in the corresponding `variable_data_size.sh` file.
 
-5. `sbatch_batched_pretrain.sh`: An example script for submitting jobs to a server (using SLURM's `sbatch` command). It defines nearly all the necessary hyperparameters, including training mode, dataset path, learning rate, and more. To perform pretraining, fine-tuning, or re-pretraining with our model, you typically only need to modify the parameters within this script.
+5. `test_noise.py`
+    1. Calculate the average RMSE, maximum RMSE, minimum RMSE, and standard deviation for each noise level.
+    2. Calculate the inference speed for each noise level (pure inference time, excluding data processing).
+    3. Please specify your dataset in the corresponding `sbatch_noise_test.sh` file
+
+6. `sbatch_batched_pretrain.sh`: An example script for submitting jobs to a server (using SLURM's `sbatch` command). It defines nearly all the necessary hyperparameters, including training mode, dataset path, learning rate, and more. To perform pretraining, fine-tuning, or re-pretraining with our model, you typically only need to modify the parameters within this script.
 
 
-## Data Format Preparation
+## Data Preparation
 ---
+
+### Data Format
+
 The expected data format for pretraining is as follows, stored in an `.xlsx` file:
 
 | Image Index | m Value | Displacement (nm) |
@@ -43,6 +51,14 @@ Similarly, the dataset for fine-tuning should also be in an `.xlsx` file with th
 |      2      |  547   |  -1.08 |
 |      3      |  452   |  -0.30 |
 |      4      |  412   |  -0.13 |
+
+### Data Structure
+We expect the file structure for storing data to be as follows：
+Dataset_simulate_First_Time/
+├─ begin_0000_end_0082/
+│  └─ down_begin_0000_end_0082/
+│     └─ image_001.npy
+│     └─ displacement.xlsx
 
 If you wish to use our scripts directly, please ensure your data format is consistent with the tables above.
 
