@@ -23,7 +23,8 @@
 5. `test_noise.py`
     1. Calculate the average RMSE, maximum RMSE, minimum RMSE, and standard deviation for each noise level.
     2. Calculate the inference speed for each noise level (pure inference time, excluding data processing).
-    3. Please specify your dataset in the corresponding `sbatch_noise_test.sh` file
+    3. There is a dedicated `noise processor.py`, which inherits from the parent `class of data processor.py`.
+    4. Please specify your dataset in the corresponding `sbatch_noise_test.sh` file
 
 6. `sbatch_batched_pretrain.sh`: An example script for submitting jobs to a server (using SLURM's `sbatch` command). It defines nearly all the necessary hyperparameters, including training mode, dataset path, learning rate, and more. To perform pretraining, fine-tuning, or re-pretraining with our model, you typically only need to modify the parameters within this script.
 
